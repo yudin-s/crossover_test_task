@@ -27,6 +27,8 @@
     <script type="text/javascript" src="{{ URL::asset('js/ie10-viewport-bug-workaround.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/core.js') }}"></script>
 
+    <script type="text/javascript" src="{{ URL::asset('js/tinymce/tinymce.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/tinymce/jquery.tinymce.min.js') }}"></script>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
 

@@ -18,4 +18,7 @@
         <!-- JavaScripts -->
         {{-- <script src="{{ elixir('js/app.js') }}"></script> --}}
 </body>
+@if(Auth::check())
+@include('profile.edit')
+@endif
 </html>
