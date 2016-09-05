@@ -29,6 +29,12 @@
 
     <script type="text/javascript" src="{{ URL::asset('js/tinymce/tinymce.min.js') }}"></script>
     <script type="text/javascript" src="{{ URL::asset('js/tinymce/jquery.tinymce.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jspdf/jspdf.min.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jspdf/png_support.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jspdf/png_support/png.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jspdf/png_support/zlib.js') }}"></script>
+    <script type="text/javascript" src="{{ URL::asset('js/jspdf/html2canvas.js') }}"></script>
+
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <script>
 

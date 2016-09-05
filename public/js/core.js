@@ -14,7 +14,6 @@ $('body').ready(function () {
     });
     $('#openAvatarDialog').click(function () {
         $('#avatarFile').click();
-
     });
     $('.reply').click(function (e) {
         var el = $(e.target);
@@ -22,19 +21,12 @@ $('body').ready(function () {
         $('#replyForm form [name=aid]').val(el.attr('aid'));
         el.parent('.actions').after($('#replyForm').html());
     });
-
 //    $('#newsTextarea').tinymce('init');
 
-
-});
-
-
-$(document).ready(function () {
     $(':file').on('fileselect', function (event, numFiles, label) {
 
         var input = $(this).parents('.input-group').find(':text'),
                 log = numFiles > 1 ? numFiles + ' files selected' : label;
-
         if (input.length) {
             input.val(log);
         } else {
@@ -43,10 +35,22 @@ $(document).ready(function () {
         }
 
     });
-
     $('#avatarFile:file').off('fileselect');
     $('#avatarFile:file').on('fileselect', function (event, numFiles, label) {
         $('#avatarForm').submit();
+    });
+    $('#toPDF').click(function () {
+        $('#makePDF').css('width', 700);
+        html2canvas($('#makePDF')[0], {
+            onrendered: function (canvas) {
+                $('#makePDF').css('width', 'auto');
 
+                var imgData = canvas.toDataURL(
+                        'image/bmp');
+                var doc = new jsPDF('p', 'mm');
+                doc.addImage(imgData, 'PNG', 10, 10);
+                doc.save('test2.pdf');
+            }
+        });
     });
 });
