@@ -17,3 +17,9 @@ Route::auth();
 Route::get('/register/verify/{id}/{code}', 'GuestController@verify');
 
 Route::get('/home', 'HomeController@index');
+Route::group(['prefix' => 'update', 'middleware' => 'auth'], function() {
+    Route::post('/avatar', 'ProfileController@postAvatar');
+    Route::post('/password', 'ProfileController@postPassword');
+    Route::post('/email', 'ProfileController@postEmail');
+});
+

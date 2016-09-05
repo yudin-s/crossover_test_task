@@ -8,6 +8,11 @@
             {{$errors->first()}}
         </div>
         @endif
+        @if(Auth::check() &&  !Auth::user()->isConfirmed)
+        <div class="alert alert-danger">
+            <strong>Account not verified!</strong> Check you email inbox.
+        </div>
+        @endif
         @yield('content')
 
         <!-- JavaScripts -->

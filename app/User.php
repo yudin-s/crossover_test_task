@@ -24,4 +24,8 @@ class User extends Authenticatable {
         'password', 'remember_token',
     ];
 
+    public function isVerify() {
+        return $this->isConfirmed == 1;
+    }
+
 }

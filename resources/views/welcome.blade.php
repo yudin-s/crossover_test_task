@@ -11,6 +11,7 @@
 </div>
 
 @endforelse
-
-
+@if(Auth::check())
+@include('profile.edit')
+@endif
 @endsection

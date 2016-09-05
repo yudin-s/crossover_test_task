@@ -15,6 +15,7 @@
     <link rel="stylesheet" href="{{ URL::asset('css/semantic.min.css') }}" />
 
     <link rel="stylesheet" href="{{ URL::asset('css/font-awesome/css/font-awesome.min.css') }}" />
+    <link rel="stylesheet" href="{{ URL::asset('css/custom.css') }}" />
 
 
     <script type="text/javascript" src="{{ URL::asset('js/jquery.min.js') }}"></script>

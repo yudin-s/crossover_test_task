@@ -8,24 +8,24 @@
     <ul class="nav navbar-right top-nav">
 
         @if (Auth::check()) 
-        <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown"><i class="fa fa-user"></i>&nbsp;John Smith <b class="caret"></b></a>
-            <ul class="dropdown-menu">
-                <li>
-                    <a href="/profile"><i class="fa fa-fw fa-user"></i> Profile</a>
-                </li>
-                <li class="divider"></li>
-                <li>
-                    <a href="#"><i class="fa fa-fw fa-power-off"></i> Log Out</a>
-                </li>
-            </ul>
+        @if(Auth::user()->isConfirmed)
+        <li>
+            <a href="/create"><i class="fa fa-fw fa-edit fa-2x"></i></a>
         </li>
+        @endif
+        <li>
+            <a data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-gears fa-2x "></i></a>
+        </li>
+        <li>
+            <a href="/logout"><i class="fa fa-fw fa-sign-out fa-2x"></i></a>
+        </li>
+
         @else
-        <li class="dropdown">
-            <a href="/login" ><i class="fa fa-key"></i> Login</a>
+        <li >
+            <a href="/login" ><i class="fa fa-sign-in fa-2x"></i></a>
         </li>
-        <li class="dropdown">
-            <a href="/register" ><i class="fa fa-user"></i> Register</a>
+        <li >
+            <a href="/register" ><i class="fa fa-user fa-2x"></i></a>
         </li>
         @endif
     </ul>
