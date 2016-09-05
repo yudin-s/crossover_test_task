@@ -1,8 +1,16 @@
-<?php
+@extends('layouts.app')
 
-/* 
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+@section('content')
 
+
+@forelse($articles as $article)
+@include('elements.home',['article'=>$article])
+@empty
+<div class="alert alert-warning">
+    <strong>Warning!</strong> News not exists. Register, verify account and write something.
+</div>
+
+@endforelse
+
+
+@endsection

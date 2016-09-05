@@ -3,10 +3,12 @@
 namespace App\Http\Controllers\Auth;
 
 use App\User;
+use Mail;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Support\Facades\Input;
 
 class AuthController extends Controller {
     /*
@@ -60,14 +62,20 @@ use AuthenticatesAndRegistersUsers,
      * @return User
      */
     protected function create(array $data) {
+        Input::merge($data);
         $verificationCode = mt_rand(0, PHP_INT_MAX);
 
-        return User::create([
+        $user = User::create([
                     'name' => $data['name'],
                     'email' => $data['email'],
                     'password' => bcrypt($data['password']),
                     'confCode' => $verificationCode
         ]);
+        Mail::send('email.verify', ['confirmation' => $verificationCode, 'id' => $user->id], function($message) {
+            $message->to(Input::get('email'), Input::get('username'))
+                    ->subject('Verify your email address');
+        });
+        return $user;
     }
 
 }
