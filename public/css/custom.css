@@ -1,3 +1,50 @@
 .editavatar{
     text-align: center;
 }
+
+.inline.card{
+    margin: 5px;
+    display: -moz-inline-stack;
+    display: inline-block;
+}
+.newsImage {
+    display:inline-block;   
+    position:relative;
+
+}
+.newsImage img{
+    width: 100%;
+}
+.newsImage span {
+    display:inline-block;
+    position:absolute;
+    bottom: 50px;   
+    left:0px;
+
+    color:#FFF;
+    font-family:Arial, Helvetica, sans-serif;
+    font-size: 250%;     
+    background-color:rgba(0,0,0,.4);
+    padding:10px 30px;
+}
+.newsText{
+    margin-top: 10px;
+    font-size: 125%;
+    line-height: 1.5em;
+    text-align: justify;
+}
+.ui.feed>.event>.label img{
+    width: 32px;
+}
+
+.rss{
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+}
+
+@media (max-width: 700px) {
+    .navbar-fixed-bottom, .navbar-fixed-top {
+        position: initial;
+    }
+}

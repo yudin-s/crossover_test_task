@@ -8,6 +8,8 @@ use Auth;
 use App\Article;
 use Validator;
 use Image;
+use App\Services\RssFeed;
+use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller {
 
@@ -56,7 +58,7 @@ class HomeController extends Controller {
         $imgname = time() . mt_rand(10, 10000);
 
         //Full image size
-        $img->fit(1250, 800);
+        $img->fit(1250, 500);
         $pathuser = public_path("img/news/1250/$imgname.png");
         $img->save($pathuser, 90);
 
@@ -73,6 +75,19 @@ class HomeController extends Controller {
                     'uid' => Auth::user()->id,
         ]);
         $article->save();
+        Cache::forget('rss-feed');
+        return redirect("/news/" . $article->id);
+    }
+
+    public function viewNews($id) {
+        $news = Article::find((int) $id);
+        return view('news', ['news' => $news, 'comments' => $news->comments()]);
+    }
+
+    public function rss() {
+        $feed = new RssFeed();
+        return response($feed->getRSS())
+                        ->header('Content-type', 'application/rss+xml');
     }
 
 }

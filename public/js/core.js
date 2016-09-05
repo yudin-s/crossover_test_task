@@ -16,7 +16,14 @@ $('body').ready(function () {
         $('#avatarFile').click();
 
     });
-    $('#newsTextarea').tinymce('init');
+    $('.reply').click(function (e) {
+        var el = $(e.target);
+        $('.comment .form').remove();
+        $('#replyForm form [name=aid]').val(el.attr('aid'));
+        el.parent('.actions').after($('#replyForm').html());
+    });
+
+//    $('#newsTextarea').tinymce('init');
 
 
 });

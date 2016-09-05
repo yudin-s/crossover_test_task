@@ -17,14 +17,23 @@ Route::auth();
 Route::get('/register/verify/{id}/{code}', 'GuestController@verify');
 
 Route::get('/home', 'HomeController@index');
+Route::get('/news/{id}', 'HomeController@viewNews');
+
 Route::get('/create', 'HomeController@create')->middleware('auth');
 
 Route::post('/add', 'HomeController@addNews')->middleware('auth');
+
 
 Route::group(['prefix' => 'update', 'middleware' => 'auth'], function() {
     Route::post('/avatar', 'ProfileController@postAvatar');
     Route::post('/password', 'ProfileController@postPassword');
     Route::post('/email', 'ProfileController@postEmail');
 });
+Route::group(['prefix' => 'comment', 'middleware' => 'auth'], function() {
+    Route::post('/create', 'CommentController@createComment');
+});
+
+Route::get('rss','HomeController@rss');
+
 
 
