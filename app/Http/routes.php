@@ -20,7 +20,7 @@ Route::get('/home', 'HomeController@index');
 Route::get('/news/{id}', 'HomeController@viewNews');
 
 Route::get('/profile/{id}', 'ProfileController@view')->middleware('auth');
-Route::get('/create', 'HomeController@create')->middleware('confirmed');
+Route::get('/create', 'HomeController@create')->middleware('auth');
 
 
 Route::group(['prefix' => 'update', 'middleware' => 'auth'], function() {
@@ -28,13 +28,23 @@ Route::group(['prefix' => 'update', 'middleware' => 'auth'], function() {
     Route::post('/password', 'ProfileController@postPassword');
     Route::post('/email', 'ProfileController@postEmail');
 });
+
 Route::group(['prefix' => 'comment', 'middleware' => 'auth'], function() {
     Route::post('/create', 'CommentController@createComment');
 });
+
 Route::group(['prefix' => 'rss'], function() {
     Route::get('/', 'HomeController@rss');
     Route::get('/profile/{id}', 'ProfileController@rss');
 });
+
+Route::group(['prefix' => 'invite', 'middleware' => 'guest'], function() {
+    Route::get('/', 'UsersCodeController@index');
+    Route::post('/send', 'UsersCodeController@sendLink');
+    Route::post('/resend', 'UsersCodeController@resendLink');
+    Route::get('/reg/{email}/{code}', 'UsersCodeController@register');
+});
+
 
 
 

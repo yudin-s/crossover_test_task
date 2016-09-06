@@ -53,7 +53,6 @@
     </div>
 
     @endif
-    @if($user->isVerify())
     <form class="ui reply form"  action="{{action('CommentController@createComment')}}" method="POST" >
         <input type="hidden" name="nid" value="{{$news->id}}"/>
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
@@ -84,7 +83,6 @@
             </button>
         </form>
     </div>
-    @endif
     <a class="rss btn btn-primary" role="button"  id="toPDF" href="#"><i class="fa fa-download fa-2x"></i></a>
 
     @endsection

@@ -8,11 +8,9 @@
     <ul class="nav navbar-right top-nav">
 
         @if (Auth::check()) 
-        @if(Auth::user()->isConfirmed)
         <li>
             <a href="/create"><i class="fa fa-fw fa-edit fa-2x"></i></a>
         </li>
-        @endif
         <li>
             <a data-toggle="modal" data-target="#myModal"><i class="fa fa-fw fa-gears fa-2x "></i></a>
         </li>
@@ -25,7 +23,7 @@
             <a href="/login" ><i class="fa fa-sign-in fa-2x"></i></a>
         </li>
         <li >
-            <a href="/register" ><i class="fa fa-user fa-2x"></i></a>
+            <a href="/invite" ><i class="fa fa-user fa-2x"></i></a>
         </li>
         @endif
     </ul>

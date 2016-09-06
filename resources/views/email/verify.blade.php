@@ -9,7 +9,7 @@
         <div>
             Thanks for creating an account with the verification demo app.
             Please follow the link below to verify your email address
-            {{ URL::to('/register/verify/'.$id.'/' . $confirmation) }}.<br/>
+            {{ URL::to('/invite/reg/'.$email.'/' . $confirmation) }}.<br/>
 
         </div>
 

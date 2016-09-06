@@ -30,7 +30,7 @@ use AuthenticatesAndRegistersUsers,
      *
      * @var string
      */
-    protected $redirectTo = '/';
+    protected $redirectTo = '/home';
 
     /**
      * Create a new authentication controller instance.
@@ -38,6 +38,7 @@ use AuthenticatesAndRegistersUsers,
      * @return void
      */
     public function __construct() {
+
         $this->middleware($this->guestMiddleware(), ['except' => 'logout']);
     }
 
@@ -71,10 +72,7 @@ use AuthenticatesAndRegistersUsers,
                     'password' => bcrypt($data['password']),
                     'confCode' => $verificationCode
         ]);
-        Mail::send('email.verify', ['confirmation' => $verificationCode, 'id' => $user->id], function($message) {
-            $message->to(Input::get('email'), Input::get('username'))
-                    ->subject('Verify your email address');
-        });
+
         return $user;
     }
 

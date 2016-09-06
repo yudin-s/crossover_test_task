@@ -49,8 +49,12 @@
 }
 .newsGrid,.newsGrid .ui.dimmer>.content>*{
     text-align: center;
-    
+
 }
 .newsGrid div{
     text-align: left;
+}
+
+#inviteLink{
+    margin-top: 20%;
 }
