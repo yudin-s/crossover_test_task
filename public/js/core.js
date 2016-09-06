@@ -40,17 +40,25 @@ $('body').ready(function () {
         $('#avatarForm').submit();
     });
     $('#toPDF').click(function () {
-        $('#makePDF').css('width', 700);
-        html2canvas($('#makePDF')[0], {
-            onrendered: function (canvas) {
-                $('#makePDF').css('width', 'auto');
 
-                var imgData = canvas.toDataURL(
-                        'image/bmp');
-                var doc = new jsPDF('p', 'mm');
-                doc.addImage(imgData, 'PNG', 10, 10);
-                doc.save('test2.pdf');
-            }
+        var el = $('#makePDF');
+        var width = el.width();
+        $('body').dimmer('show');
+        el.animate({"width": 700}, 1000, function () {
+            $('#makePDF').css('width', 700);
+            html2canvas($('#makePDF')[0], {
+                onrendered: function (canvas) {
+                    el.animate({"width": width}, 1000, function () {
+                        $('body').dimmer('hide');
+                    });
+
+                    var imgData = canvas.toDataURL(
+                            'image/bmp');
+                    var doc = new jsPDF('p', 'mm');
+                    doc.addImage(imgData, 'PNG', 10, 10);
+                    doc.save($('title').text() + ".pdf");
+                }
+            });
         });
     });
 });

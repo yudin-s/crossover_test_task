@@ -7,8 +7,6 @@
     <meta name="author" content="">
     <link rel="icon" href="../../favicon.ico">
 
-    <title>NewsRead</title>
-
     <!-- Bootstrap core CSS -->
 
     <link rel="stylesheet" href="{{ URL::asset('css/bootstrap.min.css') }}" />

@@ -7,15 +7,28 @@ use App\Http\Requests;
 use Auth;
 use Image;
 use Validator;
+use App\User;
+use Illuminate\Database\Eloquent\ModelNotFoundException;
+use App\Services\RssFeed;
 
 class ProfileController extends Controller {
+
+    public function view($id) {
+
+        try {
+            $user = User::findOrFail((int) $id);
+            return view('profile', ['user' => $user, 'title' => 'Author | ' . $user->name]);
+        } catch (ModelNotFoundException $e) {
+            return back()->withErrors(['msg', 'Profile not found.']);
+        }
+    }
 
     public function postAvatar(Request $request) {
         $file = $request->file('img');
         $path = $file->getPathName();
 
         $user = Auth::user();
-        $id = $user->id;
+        $id = $user->id . mt_rand(1, 100);
         $img = Image::make($path);
 
         $sizes = array(256, 64);
@@ -67,6 +80,18 @@ class ProfileController extends Controller {
         $user->email = $request->get('email');
         $user->save();
         return redirect('/')->withError(['Password has been saved.']);
+    }
+
+    public function rss($id) {
+        try {
+            $user = User::findOrFail((int) $id);
+            $feed = new RssFeed();
+            return response($feed->getRSS('user-' . $id, $user->news))
+                            ->header('Content-type', 'application/rss+xml');
+        } catch (ModelNotFoundException $e) {
+            return response("")
+                            ->header('Content-type', 'application/rss+xml');
+        }
     }
 
 }

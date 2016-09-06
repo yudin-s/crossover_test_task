@@ -7,7 +7,7 @@ use App\Http\Requests;
 use Auth;
 use App\Comment;
 class CommentController extends Controller {
-
+    
     public function createComment(Request $request) {
         $nid = $request->input('nid');
         $aid = $request->has('aid') ? $request->input('aid') : 0;

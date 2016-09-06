@@ -3,7 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use Carbon\Carbon;
 class Article extends Model {
 
     protected $table = 'article';
@@ -28,7 +28,7 @@ class Article extends Model {
     }
 
     public function user() {
-        return $this->hasMany('App\User', 'id', 'uid')->first();
+        return $this->hasOne('App\User', 'id', 'uid');
     }
 
     public function url() {
@@ -41,6 +41,10 @@ class Article extends Model {
         static::deleting(function($user) {
             $user->comments()->delete();
         });
+    }
+
+    public function getCreatedAtAttribute($date) {
+        return Carbon::createFromFormat('Y-m-d H:i:s', $date)->format('d.m.Y');
     }
 
 }

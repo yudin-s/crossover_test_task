@@ -6,3 +6,5 @@ Homestead.json
 .env
 public/img/news/
 public/img/avatars/
+.idea/
+nbproject/

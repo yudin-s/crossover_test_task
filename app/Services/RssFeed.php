@@ -14,13 +14,13 @@ class RssFeed {
     /**
      * Return the content of the RSS feed
      */
-    public function getRSS() {
-        if (Cache::has('rss-feed')) {
-            return Cache::get('rss-feed');
+    public function getRSS($key, $posts) {
+        if (Cache::has($key . '-rss')) {
+            return Cache::get($key . '-rss');
         }
 
-        $rss = $this->buildRssData();
-        Cache::add('rss-feed', $rss, 120);
+        $rss = $this->buildRssData($posts);
+        Cache::add($key . '-rss', $rss, 120);
 
         return $rss;
     }
@@ -30,7 +30,7 @@ class RssFeed {
      *
      * @return string
      */
-    protected function buildRssData() {
+    protected function buildRssData(&$posts) {
         $now = Carbon::now();
         $feed = new Feed();
         $channel = new Channel();
@@ -42,9 +42,7 @@ class RssFeed {
                 ->lastBuildDate($now->timestamp)
                 ->appendTo($feed);
 
-        $posts = Article::orderBy('created_at', 'desc')
-                ->take(10)
-                ->get();
+
 
         foreach ($posts as $post) {
             $item = new Item();

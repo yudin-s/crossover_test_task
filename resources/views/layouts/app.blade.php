@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
     @include('inc.header')
+    <title>{{isset($title)? $title : env('SITE_NAME')}}</title>
+
     <body id="app-layout">
         @include('inc.navbar')
         @if($errors->any())
+        @foreach($errors->all() as $error)
         <div class="alert alert-info">
-            {{$errors->first()}}
+            {{$error}}
         </div>
+        @endforeach
         @endif
         @if(Auth::check() &&  !Auth::user()->isConfirmed)
         <div class="alert alert-danger">

@@ -19,9 +19,8 @@ Route::get('/register/verify/{id}/{code}', 'GuestController@verify');
 Route::get('/home', 'HomeController@index');
 Route::get('/news/{id}', 'HomeController@viewNews');
 
-Route::get('/create', 'HomeController@create')->middleware('auth');
-
-Route::post('/add', 'HomeController@addNews')->middleware('auth');
+Route::get('/profile/{id}', 'ProfileController@view')->middleware('auth');
+Route::get('/create', 'HomeController@create')->middleware('confirmed');
 
 
 Route::group(['prefix' => 'update', 'middleware' => 'auth'], function() {
@@ -32,8 +31,11 @@ Route::group(['prefix' => 'update', 'middleware' => 'auth'], function() {
 Route::group(['prefix' => 'comment', 'middleware' => 'auth'], function() {
     Route::post('/create', 'CommentController@createComment');
 });
+Route::group(['prefix' => 'rss'], function() {
+    Route::get('/', 'HomeController@rss');
+    Route::get('/profile/{id}', 'ProfileController@rss');
+});
 
-Route::get('rss','HomeController@rss');
 
 
 

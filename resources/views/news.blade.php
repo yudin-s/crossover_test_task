@@ -2,6 +2,10 @@
 
 @section('content')
 <div class="container">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item"><a href="/">All News</a></li>
+        <li class="breadcrumb-item active">{{$news->title}}</li>
+    </ol>
     <div id="makePDF">
 
         <div class="heading">
@@ -16,10 +20,10 @@
         <div class="ui feed">
             <div class="event">
                 <div class="label">
-                    <img src="/img/avatars/64/{{$news->user()->avatar}}.png">
+                    <a href='{{action('ProfileController@view',$news->user->id)}}'><img src="/img/avatars/64/{{$news->user->avatar}}.png"></a>
                 </div>
                 <div class="content">
-                    {{$news->user()->name}} at {{$news->created_at}}
+                    <a href='{{action('ProfileController@view',$news->user->id)}}'>{{$news->user->name}}</a> at {{$news->created_at}}
                 </div>
             </div>
         </div>
@@ -36,19 +40,20 @@
     </h4>
 
 
-    <div class="ui comments">
-        @forelse($comments->get() as $comment)
-        @include('elements.comment',$comment)
-        @empty
-        <div class="ui warning message">
-            <i class="close icon"></i>
-            <div class="header">
-                Comments not found
-            </div>
-            Already not comment this news. Be first.
-        </div>
-        @endforelse
+    @if(!count($comments->get()))
+    <div class="alert alert-info">
+            <i class="fa fa-info-circle"></i>  <strong> Comments not exists for now</strong> Be first!
     </div>
+    @else
+    <div class="ui comments">
+
+        @foreach($comments->get() as $comment)
+        @include('elements.comment',$comment)
+        @endforeach
+    </div>
+
+    @endif
+    @if($user->isVerify())
     <form class="ui reply form"  action="{{action('CommentController@createComment')}}" method="POST" >
         <input type="hidden" name="nid" value="{{$news->id}}"/>
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
@@ -61,9 +66,7 @@
             Comment
         </button>
     </form>
-    <div class="ui dimmer">
-
-    </div>
+   
 
 
     <div class="hidden" id="replyForm">
@@ -81,6 +84,7 @@
             </button>
         </form>
     </div>
+    @endif
     <a class="rss btn btn-primary" role="button"  id="toPDF" href="#"><i class="fa fa-download fa-2x"></i></a>
 
     @endsection

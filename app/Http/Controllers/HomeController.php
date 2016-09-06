@@ -12,16 +12,11 @@ use App\Services\RssFeed;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller {
-
     /**
      * Create a new controller instance.
      *
      * @return void
      */
-    public function __construct() {
-
-        $this->middleware('auth');
-    }
 
     /**
      * Show the application dashboard.
@@ -75,18 +70,17 @@ class HomeController extends Controller {
                     'uid' => Auth::user()->id,
         ]);
         $article->save();
-        Cache::forget('rss-feed');
         return redirect("/news/" . $article->id);
     }
 
     public function viewNews($id) {
         $news = Article::find((int) $id);
-        return view('news', ['news' => $news, 'comments' => $news->comments()]);
+        return view('news', ['news' => $news, 'comments' => $news->comments(), 'title' => $news->title, 'user' => Auth::user()]);
     }
 
     public function rss() {
         $feed = new RssFeed();
-        return response($feed->getRSS())
+        return response($feed->getRSS('home', Article::getLast()->get()))
                         ->header('Content-type', 'application/rss+xml');
     }
 
