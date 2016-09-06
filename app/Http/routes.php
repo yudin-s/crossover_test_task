@@ -21,6 +21,7 @@ Route::get('/news/{id}', 'HomeController@viewNews');
 
 Route::get('/profile/{id}', 'ProfileController@view')->middleware('auth');
 Route::get('/create', 'HomeController@create')->middleware('auth');
+Route::post('/add', 'HomeController@addNews')->middleware('auth');
 
 
 Route::group(['prefix' => 'update', 'middleware' => 'auth'], function() {

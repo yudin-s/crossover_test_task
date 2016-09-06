@@ -39,7 +39,7 @@ class UsersCodeController extends Controller {
     }
 
     public function sendLink(Request $request) {
-        $rules = ['email' => 'required|unique:users_codes|max:255'];
+        $rules = ['email' => 'required|unique:users|max:255'];
         $valid = Validator::make($request->all(), $rules);
         if ($valid->fails()) {
             return back()->withErrors($valid);

@@ -23,6 +23,9 @@ class UsersCode extends Model {
         static::created(function($obj) {
             Session::put(self::USER_SESSION_KEY, $obj);
         });
+        static::deleted(function($obj) {
+            Session::forget(self::USER_SESSION_KEY);
+        });
     }
 
 }

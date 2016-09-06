@@ -9,6 +9,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
 use Illuminate\Support\Facades\Input;
+use App\UsersCode;
 
 class AuthController extends Controller {
     /*
@@ -64,14 +65,15 @@ use AuthenticatesAndRegistersUsers,
      */
     protected function create(array $data) {
         Input::merge($data);
-        $verificationCode = mt_rand(0, PHP_INT_MAX);
 
         $user = User::create([
                     'name' => $data['name'],
                     'email' => $data['email'],
                     'password' => bcrypt($data['password']),
-                    'confCode' => $verificationCode
         ]);
+        $records = UsersCode::where('email', '=', $data['email']);
+        $records->delete();
+        Session::forget(UsersCode::USER_SESSION_KEY);
 
         return $user;
     }
