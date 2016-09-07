@@ -90,6 +90,6 @@
     </div>
     @endif
 </div>
-<a class="rss btn btn-primary" role="button"  id="toPDF" href="#"><i class="fa fa-download fa-2x"></i></a>
+<a class="rss btn btn-primary" role="button"  target="_blank" href="{{url('/pdf/article',$news->id)}}"><i class="fa fa-download fa-2x"></i></a>
 
 @endsection

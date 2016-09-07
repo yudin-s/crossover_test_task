@@ -10,10 +10,10 @@ use PDF;
 class PDFController extends Controller {
 
     public function article($id) {
-        $article = Article::findOrFail((int) $id);
 
+        $article = Article::findOrFail((int) $id);
         $pdf = PDF::loadView('pdf.news', ['news' => $article]);
-        return $pdf->download('invoice.pdf');
+        return $pdf->download(str_replace(' ', '', $article->title) . '.pdf');
     }
 
 }
