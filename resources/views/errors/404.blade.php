@@ -48,7 +48,7 @@
             <div class="content">
 
                 <div class="title">404<br/>Page not found.</div>
-                <div class="title"><a href='{{url('/')}}'>Return to main page.</a></div>
+                <div class="title"><a href='{{url('/')}}'>Return to main page</a></div>
 
             </div>
         </div>

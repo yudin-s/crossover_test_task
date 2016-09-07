@@ -10,6 +10,7 @@ class ExampleTest extends TestCase
      * A basic functional test example.
      *
      * @return void
+     * @assert () == true
      */
     public function testBasicExample()
     {
