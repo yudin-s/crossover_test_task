@@ -219,7 +219,7 @@ return array(
          *
          * @var bool
          */
-        "DOMPDF_ENABLE_JAVASCRIPT" => true,
+        "DOMPDF_ENABLE_JAVASCRIPT" => false,
 
         /**
          * Enable remote file access
@@ -251,7 +251,7 @@ return array(
          * Allows people to disabled CSS float support
          * @var bool
          */
-        "DOMPDF_ENABLE_CSS_FLOAT" => false,
+        "DOMPDF_ENABLE_CSS_FLOAT" => true,
 
 
         /**

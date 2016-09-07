@@ -46,6 +46,9 @@ Route::group(['prefix' => 'invite', 'middleware' => 'guest'], function() {
 });
 
 
+Route::group(['prefix' => 'pdf'], function() {
+    Route::get('/article/{id}', 'PDFController@article');
+});
 
 
 
