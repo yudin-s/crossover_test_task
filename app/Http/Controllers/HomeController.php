@@ -12,14 +12,14 @@ use App\Services\RssFeed;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller {
- 
+
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $articles = Article::all();
+        $articles = Article::orderBy('created_at', 'desc')->get();
         $user = Auth::user();
         return view('welcome', ['articles' => $articles, 'user' => $user]);
     }
@@ -70,13 +70,29 @@ class HomeController extends Controller {
 
     public function viewNews($id) {
         $news = Article::find((int) $id);
-        return view('news', ['news' => $news, 'comments' => $news->comments(), 'title' => $news->title, 'user' => Auth::user()]);
+        return view('news', ['news' => $news, 'comments' => $news->comments(), 'title' => $news->title, 'user' => $news->user]);
     }
 
     public function rss() {
         $feed = new RssFeed();
         return response($feed->getRSS('home', Article::getLast()->get()))
                         ->header('Content-type', 'application/rss+xml');
+    }
+
+    public function postRemove(Request $request) {
+        try {
+            $news = Article::find((int) $request->input('id'));
+        } catch (Illuminate\Database\Eloquent\ModelNotFoundException $e) {
+            return back()->withErrors(['News not exist']);
+        }
+
+        $user = Auth::user();
+        if ($news->uid != $user->id) {
+            return back()->withErrors(['It\'s not your news.']);
+        }
+
+        $news->delete();
+        return redirect('/home')->withErrors(['News delete successfull.']);
     }
 
 }

@@ -12,7 +12,6 @@ use Illuminate\Support\Facades\Session;
 
 class UsersCodeController extends Controller {
 
-
     public function register($email, $code) {
         $record = UsersCode::where([['email', '=', $email], ['code', '=', $code]]);
         if ($record->count()) {
@@ -42,14 +41,14 @@ class UsersCodeController extends Controller {
             return redirect('/login')->withErrors($valid);
         }
         $code = mt_rand(10, 100000);
-        $email = $request->get('email');
+        $email = $request->get('invite');
 
 
         $obj = UsersCode::create(['email' => $email, 'code' => $code]);
         Mail::send('email.verify', [
             'confirmation' => $code,
             'email' => Input::get('email')], function($message) {
-            $message->to(Input::get('email'), Input::get('email'))
+            $message->to(Input::get('invite'), Input::get('invite'))
                     ->subject('Verify your email address');
         });
         return redirect('/');

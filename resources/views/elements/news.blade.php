@@ -4,6 +4,9 @@
             <div class="content">
                 <div class="pull-center">
                     <a href="/news/{{$news->id}}" class="ui inverted button">View News</a>
+                    @if(Auth::check() && $news->uid == Auth::user()->id)
+                    <a data-toggle="modal" data-target="#deleteModal" news='{{$news->id}}' class="ui inverted button">Delete news</a>
+                    @endif
                 </div>
             </div>
         </div>

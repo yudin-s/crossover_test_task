@@ -16,7 +16,7 @@ class GuestController extends Controller {
         $articles = Article::getLast();
 
         $sendLink = Session::get(UsersCode::USER_SESSION_KEY);
-        return view('welcome', ['articles' => $articles, 'userCode' => $sendLink]);
+        return view('welcome', ['articles' => $articles->get(), 'userCode' => $sendLink]);
     }
 
 }

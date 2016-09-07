@@ -1,5 +1,8 @@
 $('body').ready(function () {
-    console.log('token set');
+    $('#deleteModal').on('shown.bs.modal', function (e) {
+        var id = $(e.relatedTarget).attr('news');
+        $('#newsID').val(id);
+    });
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
