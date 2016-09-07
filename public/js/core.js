@@ -46,22 +46,30 @@ $('body').ready(function () {
 
         var el = $('#makePDF');
         var width = el.width();
-        $('body').dimmer('show');
-        el.animate({"width": 700}, 1000, function () {
-            $('#makePDF').css('width', 700);
-            html2canvas($('#makePDF')[0], {
-                onrendered: function (canvas) {
-                    el.animate({"width": width}, 1000, function () {
-                        $('body').dimmer('hide');
-                    });
+        var doc = new jsPDF();
+        var text = $('.newsText').text();
+        var documents = text;
+        doc.text(15, 15, doc.splitTextToSize(documents, 180)
+                );
+        doc.save($('title').text() + ".pdf");
 
-                    var imgData = canvas.toDataURL(
-                            'image/bmp');
-                    var doc = new jsPDF('p', 'mm');
-                    doc.addImage(imgData, 'PNG', 10, 10);
-                    doc.save($('title').text() + ".pdf");
-                }
-            });
-        });
+
+
     });
 });
+
+function getBase64Image(img) {
+
+    var canvas = document.createElement("canvas");
+    var q = img.width / img.height;
+    canvas.width = 300;
+    canvas.height = 700;
+    var ctx = canvas.getContext("2d");
+
+    ctx.drawImage(img, 0, 0);
+
+    var dataURL = canvas.toDataURL("image/jpeg");
+
+    return dataURL.replace(/^data:image\/(png|jpg);base64,/, "");
+
+}

@@ -42,7 +42,7 @@
 
     @if(!count($comments->get()))
     <div class="alert alert-info">
-            <i class="fa fa-info-circle"></i>  <strong> Comments not exists for now</strong> Be first!
+        <i class="fa fa-info-circle"></i>  <strong> Comments not exists for now</strong> Be first!
     </div>
     @else
     <div class="ui comments">
@@ -53,6 +53,7 @@
     </div>
 
     @endif
+    @if(Auth::check())
     <form class="ui reply form"  action="{{action('CommentController@createComment')}}" method="POST" >
         <input type="hidden" name="nid" value="{{$news->id}}"/>
         <input type="hidden" name="_token" value="{{csrf_token()}}"/>
@@ -65,7 +66,7 @@
             Comment
         </button>
     </form>
-   
+
 
 
     <div class="hidden" id="replyForm">
@@ -83,6 +84,12 @@
             </button>
         </form>
     </div>
-    <a class="rss btn btn-primary" role="button"  id="toPDF" href="#"><i class="fa fa-download fa-2x"></i></a>
+    @else
+    <div class="alert alert-danger">
+        <i class="fa fa-warning"></i>  <strong> You cannot leave comment</strong>! <a href="{{url('/login')}}" >Login or register</a>
+    </div>
+    @endif
+</div>
+<a class="rss btn btn-primary" role="button"  id="toPDF" href="#"><i class="fa fa-download fa-2x"></i></a>
 
-    @endsection
+@endsection

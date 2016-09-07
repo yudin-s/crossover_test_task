@@ -47,7 +47,7 @@ class UsersCodeController extends Controller {
         $obj = UsersCode::create(['email' => $email, 'code' => $code]);
         Mail::send('email.verify', [
             'confirmation' => $code,
-            'email' => Input::get('email')], function($message) {
+            'email' => Input::get('invite')], function($message) {
             $message->to(Input::get('invite'), Input::get('invite'))
                     ->subject('Verify your email address');
         });

@@ -21,4 +21,6 @@
 @if(Auth::check())
 @include('profile.edit')
 @endif
+
+@include('inc.footer')
 </html>

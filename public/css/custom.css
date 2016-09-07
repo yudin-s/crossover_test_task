@@ -61,3 +61,8 @@
 .ui.card>.content .header{
     height: 50px;
 }
+
+#footer{
+    margin-top: 100px;
+    min-height: 100px;
+}

@@ -69,7 +69,7 @@ class HomeController extends Controller {
     }
 
     public function viewNews($id) {
-        $news = Article::find((int) $id);
+        $news = Article::findOrFail((int) $id);
         return view('news', ['news' => $news, 'comments' => $news->comments(), 'title' => $news->title, 'user' => $news->user]);
     }
 
