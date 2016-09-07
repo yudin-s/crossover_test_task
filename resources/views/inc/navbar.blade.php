@@ -22,9 +22,7 @@
         <li >
             <a href="/login" ><i class="fa fa-sign-in fa-2x"></i></a>
         </li>
-        <li >
-            <a href="/invite" ><i class="fa fa-user fa-2x"></i></a>
-        </li>
+
         @endif
     </ul>
     <!-- /.navbar-collapse -->

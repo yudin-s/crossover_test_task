@@ -55,6 +55,9 @@
     text-align: left;
 }
 
-#inviteLink{
-    margin-top: 20%;
+.modalLogin{
+    padding: 13px;
+}
+.ui.card>.content .header{
+    height: 50px;
 }

@@ -19,16 +19,4 @@ class GuestController extends Controller {
         return view('welcome', ['articles' => $articles, 'userCode' => $sendLink]);
     }
 
-    public function verify($id, $code) {
-//        $user = User::where([['id', '=', $id], ['confCode', '=', $code]]);
-//        if ($user->count()) {
-//            $user = $user->first();
-//            $user->save();
-//            Auth::login($user, true);
-//            return redirect('/')->withErrors(['Account approved.']);
-//        } else {
-//            return redirect('/')->withErrors(['Confirmation code not exist.']);
-//        }
-    }
-
 }

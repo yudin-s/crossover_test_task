@@ -40,7 +40,6 @@ Route::group(['prefix' => 'rss'], function() {
 });
 
 Route::group(['prefix' => 'invite', 'middleware' => 'guest'], function() {
-    Route::get('/', 'UsersCodeController@index');
     Route::post('/send', 'UsersCodeController@sendLink');
     Route::post('/resend', 'UsersCodeController@resendLink');
     Route::get('/reg/{email}/{code}', 'UsersCodeController@register');

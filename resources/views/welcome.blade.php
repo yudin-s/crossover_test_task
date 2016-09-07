@@ -29,4 +29,6 @@
     @endforelse
 </div>
 <a class="rss btn btn-primary" role="button" href="{{action("HomeController@rss")}}"><i class="fa fa-rss fa-2x"></i></a>
+@include('elements.modallogin')
+
 @endsection

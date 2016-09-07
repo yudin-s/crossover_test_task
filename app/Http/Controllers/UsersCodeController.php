@@ -12,9 +12,6 @@ use Illuminate\Support\Facades\Session;
 
 class UsersCodeController extends Controller {
 
-    public function index() {
-        return view('link');
-    }
 
     public function register($email, $code) {
         $record = UsersCode::where([['email', '=', $email], ['code', '=', $code]]);
@@ -39,10 +36,10 @@ class UsersCodeController extends Controller {
     }
 
     public function sendLink(Request $request) {
-        $rules = ['email' => 'required|unique:users|max:255'];
+        $rules = ['invite' => 'required|unique:users,email|max:255'];
         $valid = Validator::make($request->all(), $rules);
         if ($valid->fails()) {
-            return back()->withErrors($valid);
+            return redirect('/login')->withErrors($valid);
         }
         $code = mt_rand(10, 100000);
         $email = $request->get('email');

@@ -12,19 +12,14 @@ use App\Services\RssFeed;
 use Illuminate\Support\Facades\Cache;
 
 class HomeController extends Controller {
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
-
+ 
     /**
      * Show the application dashboard.
      *
      * @return \Illuminate\Http\Response
      */
     public function index() {
-        $articles = Article::getLast();
+        $articles = Article::all();
         $user = Auth::user();
         return view('welcome', ['articles' => $articles, 'user' => $user]);
     }
@@ -37,7 +32,7 @@ class HomeController extends Controller {
 
     public function addNews(Request $request) {
         $rules = [
-            'title' => 'required|min:10|max:50',
+            'title' => 'required|min:10|max:100',
             'desc' => 'required|min:200',
             'img' => 'mimes:jpeg,bmp,png',
         ];
