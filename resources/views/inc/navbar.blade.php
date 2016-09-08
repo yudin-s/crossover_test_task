@@ -7,7 +7,10 @@
     </div>
     <ul class="nav navbar-right top-nav">
 
-        @if (Auth::check()) 
+        @if (Auth::check())
+            <li>
+                <a href="/profile/{{Auth::user()->id}}"><i class="fa fa-fw fa-star fa-2x"></i></a>
+            </li>
         <li>
             <a href="/create"><i class="fa fa-fw fa-edit fa-2x"></i></a>
         </li>
