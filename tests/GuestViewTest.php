@@ -4,9 +4,8 @@ use Illuminate\Foundation\Testing\WithoutMiddleware;
 use Illuminate\Foundation\Testing\DatabaseMigrations;
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 
-class GuestPathAvitable extends TestCase
+class GuestViewTest extends TestCase
 {
-
     /**
      * @assert () == true
      */
@@ -76,6 +75,5 @@ class GuestPathAvitable extends TestCase
         unlink($file);
         return $result;
     }
-
 
 }
