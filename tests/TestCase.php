@@ -2,6 +2,13 @@
 
 class TestCase extends Illuminate\Foundation\Testing\TestCase
 {
+    private function prepareForTests() {
+        // e-mail will look like will be send but it is just pretending
+        Mail::pretend(true);
+        // if you want to test the routes
+        Route::enableFilters();
+    }
+
     /**
      * The base URL to use while testing the application.
      *
